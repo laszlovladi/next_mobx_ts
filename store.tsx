@@ -1,4 +1,4 @@
-import { action, observable, computed, runInAction } from 'mobx'
+import { action, observable} from 'mobx'
 import { useStaticRendering } from 'mobx-react'
 import { useMemo } from 'react'
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -7,38 +7,27 @@ useStaticRendering(typeof window === 'undefined')
 let store
 
 class Store {
-  @observable lastUpdate = 0
-  @observable light = false
+  @observable employees = null
 
-  @action start = () => {
-    this.timer = setInterval(() => {
-      runInAction(() => {
-        this.lastUpdate = Date.now()
-        this.light = true
+  getData() {
+    fetch('http://dummy.restapiexample.com/api/v1/employees')
+      .then(response => response.json())
+      .then(data => {
+        this.setEmployees(data.data);
       })
-    }, 1000)
   }
-
-  @computed get timeString() {
-    const pad = (n) => (n < 10 ? `0${n}` : n)
-    const format = (t) =>
-      `${pad(t.getUTCHours())}:${pad(t.getUTCMinutes())}:${pad(
-        t.getUTCSeconds()
-      )}`
-    return format(new Date(this.lastUpdate))
+  
+  @action setEmployees = (employees) => {
+        console.log('employees', employees)
+        this.employees = employees
   }
-
-  stop = () => clearInterval(this.timer)
 
   hydrate = (data) => {
-    if (!data) return
-
-    this.lastUpdate = data.lastUpdate !== null ? data.lastUpdate : Date.now()
-    this.light = !!data.light
+    this.setEmployees(data)
   }
 }
 
-function initializeStore(initialData = null) {
+function initializeStore(initialData = {employees: []}) {
   const _store = store ?? new Store()
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will
