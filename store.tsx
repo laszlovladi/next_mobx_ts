@@ -8,22 +8,15 @@ let store
 
 class Store {
   @observable employees = null
-
-  getData() {
-    fetch('http://dummy.restapiexample.com/api/v1/employees')
-      .then(response => response.json())
-      .then(data => {
-        this.setEmployees(data.data);
-      })
-  }
   
   @action setEmployees = (employees) => {
-        console.log('employees', employees)
-        this.employees = employees
+    console.log('new employees', employees)
+    this.employees = employees
   }
 
   hydrate = (data) => {
-    this.setEmployees(data)
+    if (!data) return
+    this.employees = data.employees !== null ? data.employees : 'no data'
   }
 }
 

@@ -7,11 +7,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/reactstrap": "^8.4.3",
+    "bootstrap": "^4.5.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "next": "latest",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "reactstrap": "^8.5.1"
   },
   "license": "ISC",
   "devDependencies": {

@@ -1,5 +1,5 @@
-import Page from '../components/Page'
+import AboutPage from '../components/AboutPage'
 
 export default function About() {
-  return <Page title="Other Page" linkTo="/" />
+  return <AboutPage title="About Page"/>
 }
