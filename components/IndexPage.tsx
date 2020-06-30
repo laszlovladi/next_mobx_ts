@@ -1,9 +1,8 @@
-// import { inject, observer } from 'mobx-react'
 import NavigationBar from  '../components/NavigationBar'
 import List from  '../components/List'
-// @inject('store')
-// @observer
-class IndexPage extends React.Component {
+import React from 'react'
+
+class IndexPage extends React.Component{
   render() {
     return (
       <div>

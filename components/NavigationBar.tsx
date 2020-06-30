@@ -1,9 +1,10 @@
 import { Navbar, Nav, NavItem, NavbarText } from 'reactstrap';
 import Link from 'next/link'
+import { FC } from 'react';
 
-const NavigationBar = () => (
+const NavigationBar: FC = () => (
   <div>
-    <Navbar color="primary" light expand="sm"> {/* expand="md" */}
+    <Navbar color="primary" light expand="sm">
         <NavbarText className="text-white" >Simple List</NavbarText>
         <Nav className="ml-auto" navbar>
           <NavItem className="ml-2">

@@ -4,12 +4,19 @@ import { useMemo } from 'react'
 // eslint-disable-next-line react-hooks/rules-of-hooks
 useStaticRendering(typeof window === 'undefined')
 
-let store
+let store: Store
+
+export type Employee = {
+  id: number,
+  employee_name: string,
+  employee_salary: number,
+  employee_age: number
+}
 
 class Store {
-  @observable employees = null
+  @observable employees: Array<Employee> | null = null
   
-  @action setEmployees = (employees) => {
+  @action setEmployees = (employees: Array<Employee> | null) => {
     console.log('new employees', employees)
     this.employees = employees
   }
@@ -21,7 +28,7 @@ class Store {
 }
 
 function initializeStore(initialData = {employees: []}) {
-  const _store = store ?? new Store()
+  const _store: Store = store ?? new Store()
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.js` and `pages/ssr.js` for more details
@@ -36,7 +43,7 @@ function initializeStore(initialData = {employees: []}) {
   return _store
 }
 
-export function useStore(initialState) {
+export function useStore(initialState: Store) {
   const store = useMemo(() => initializeStore(initialState), [initialState])
   return store
 }

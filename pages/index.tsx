@@ -1,12 +1,16 @@
 import IndexPage from '../components/IndexPage'
+import { Employee } from '../store'
+import { InferGetServerSidePropsType } from 'next'
 
-export default function Index() {
+function Index({ initialState }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return <IndexPage title = "Simple List"/>
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps = async () => {
   const res = await fetch(`http://dummy.restapiexample.com/api/v1/employees`) //  https://jsonplaceholder.typicode.com/users
   const data = await res.json()
-  console.log('data from page', data)
-  return { props: { initialState: { employees: data.data } } }
+  const employees: Array<Employee> = data.data
+  return { props: { initialState: { employees: employees } } }
 }
+
+export default Index

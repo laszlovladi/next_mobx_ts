@@ -1,9 +1,11 @@
 import { inject, observer } from 'mobx-react'
 import { Table } from 'reactstrap';
-import { FC } from 'react';
+import React from 'react';
+import { Employee } from '../store'
+
 @inject('store')
 @observer
-class List extends React.Component {
+class List  extends React.Component<{}> {
   render() {
     const employees = this.props.store.employees;
     return (
@@ -18,7 +20,7 @@ class List extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee, idx) => (
+            {employees.map((employee: Employee, idx: number) => (
               <tr className="listItem" key={idx}>
                 <th className="text-secondary">{employee.id} </th>
                 <td className="text-secondary">{employee.employee_name} </td>
