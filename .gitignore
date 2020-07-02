@@ -28,10 +28,3 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
-/components/Clock.js
-/components/Paje_ex.js
-/pages/_app_ex.js
-/pages/ssg.js
-/pages/ssr.js
-store_ex.js
