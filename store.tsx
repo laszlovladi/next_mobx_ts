@@ -8,9 +8,13 @@ let store: Store
 
 export type Employee = {
   id: number,
-  employee_name: string,
-  employee_salary: number,
-  employee_age: number
+  name: string,
+  username: string,
+  email: string,
+  address: object,
+  phone: string,
+  website: string,
+  company: object
 }
 
 class Store {
@@ -21,13 +25,19 @@ class Store {
     this.employees = employees
   }
 
+  @action deleteEmployee = (idx) => {
+    this.employees.splice(idx, 1)
+  }
+
   hydrate = (data) => {
     if (!data) return
-    this.employees = data.employees !== null ? data.employees : 'no data'
+    console.log('store', store)
+    if (!store) this.employees = data.employees !== null ? data.employees : 'no data'
   }
 }
 
 function initializeStore(initialData = {employees: []}) {
+  console.log('store', store)
   const _store: Store = store ?? new Store()
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will

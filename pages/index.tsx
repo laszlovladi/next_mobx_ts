@@ -7,9 +7,9 @@ function Index({ initialState }: InferGetServerSidePropsType<typeof getServerSid
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch(`http://dummy.restapiexample.com/api/v1/employees`) //  https://jsonplaceholder.typicode.com/users
+  const res = await fetch(`https://jsonplaceholder.typicode.com/users`) //   http://dummy.restapiexample.com/api/v1/employees
   const data = await res.json()
-  const employees: Array<Employee> = data.data
+  const employees: Array<Employee> = data
   return { props: { initialState: { employees: employees } } }
 }
 
