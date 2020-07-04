@@ -20,9 +20,9 @@ export type Employee = {
 class Store {
   @observable employees: Array<Employee> | null = null
   
-  @action setEmployees = (employees: Array<Employee> | null) => {
-    console.log('new employees', employees)
-    this.employees = employees
+  @action addEmployee = (employee: Employee) => {
+    console.log('addEmployee')
+    this.employees.push(employee)
   }
 
   @action deleteEmployee = (idx) => {

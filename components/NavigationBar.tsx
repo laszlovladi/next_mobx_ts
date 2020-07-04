@@ -7,12 +7,17 @@ const NavigationBar: FC = () => (
     <Navbar color="primary" light expand="sm">
         <NavbarText className="text-white" >Simple List</NavbarText>
         <Nav className="ml-auto" navbar>
-          <NavItem className="ml-2">
+          <NavItem className="mr-3">
             <Link href="/">
               <a className="text-white">Home</a>
             </Link>
           </NavItem>
-          <NavItem className="ml-2">
+          <NavItem className="mr-3">
+            <Link href="/add">
+              <a className="text-white">Add employee</a>
+            </Link>
+          </NavItem>
+          <NavItem className="mr-3">
             <Link href="/about">
               <a className="text-white">About</a>
             </Link>

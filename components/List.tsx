@@ -18,7 +18,7 @@ class List  extends React.Component<{}> {
         <Table striped>
           <thead>
             <tr>
-              <th className="text-secondary">Id</th>
+              <th className="text-secondary">No.</th>
               <th className="text-secondary">Name</th>
               <th className="text-secondary">Username</th>
               <th className="text-secondary">Email</th>
@@ -34,16 +34,12 @@ class List  extends React.Component<{}> {
                 <td className="text-secondary">{employee.username} </td>
                 <td className="text-secondary">{employee.email}</td>
                 <td className="text-secondary">
-                  <Link href={`/details/${idx}`}>
+                  <Link as={`/details/${idx}?data=${employee.name}`} href={`/details/[id]`}>
                     <a className="text-primary">Details</a>
                   </Link>
                 </td>
                 <td className="text-secondary">
-                  <Button color="link p-0 text-danger" onClick={() => {
-                        this.handleDelete(idx);
-                      }}
-                    >Delete
-                  </Button>
+                  <Button color="link p-0 text-danger" onClick={() => this.handleDelete(idx)}>Delete</Button>
                 </td>
               </tr>
             ))}
