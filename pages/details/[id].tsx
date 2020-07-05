@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { Button } from 'reactstrap';
 import Link from 'next/link';
 
-const Employee = inject("store")(observer((props) => {
+const Employee = inject("store")(observer((props: any) => {
   const router = useRouter()
   const { id } = router.query
   const { name, username, email, phone, website, address, company } = props.store.employees[Number(id)]

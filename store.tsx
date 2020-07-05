@@ -1,4 +1,4 @@
-import { action, observable} from 'mobx'
+import { action, computed, observable} from 'mobx'
 import { useStaticRendering } from 'mobx-react'
 import { useMemo } from 'react'
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -6,37 +6,88 @@ useStaticRendering(typeof window === 'undefined')
 
 let store: Store
 
-export type Employee = {
-  id: number,
+export interface Employee{
+  id?: number,
   name: string,
   username: string,
   email: string,
-  address: object,
+  address: Address,
   phone: string,
   website: string,
-  company: object
+  company: Company
+}
+
+export interface Company{
+  name: string,
+  catchPhrase: string,
+  bs: string
+}
+
+export interface Geo{
+  lat: string,
+  lng: string
+}
+
+export interface Data{
+  employees: Array<Employee>
+}
+
+export interface Address{
+  street: string,
+  suite: string,
+  city: string,
+  zipcode: string,
+  geo: Geo
 }
 
 class Store {
-  @observable employees: Array<Employee> | null = null
+  @observable employees: Array<Employee> = []
+  @observable newEmployee: Employee = {
+      id: undefined,
+      name: "",
+      username: "",
+      email: "",
+      address: {
+        street: "",
+        suite: "",
+        city: "",
+        zipcode: "",
+        geo: {
+          lat: "",
+          lng: ""
+        }
+      },
+      phone: "",
+      website: "",
+      company: {
+        name: "",
+        catchPhrase: "",
+        bs: ""
+      }
+    }
   
-  @action addEmployee = (employee: Employee) => {
+  @action addEmployee = (employee: Employee): void => {
     console.log('addEmployee')
     this.employees.push(employee)
   }
 
-  @action deleteEmployee = (idx) => {
+  @action deleteEmployee = (idx: number): void => {
     this.employees.splice(idx, 1)
   }
 
-  hydrate = (data) => {
+  @action onChange = (key, value) => {
+    console.log(key, value)
+    this.newEmployee[key] = value;
+    console.log('this.newEmployee[key]', this.newEmployee[key])
+  }
+
+  hydrate = (data: Data): void => {
     if (!data) return
-    // console.log('store', store)
-    if (!store) this.employees = data.employees !== null ? data.employees : 'no data'
+    if (!store) this.employees = data.employees  
   }
 }
 
-function initializeStore(initialData = {employees: []}) {
+function initializeStore(initialData: Data = {employees: []}) {
   // console.log('store', store)
   const _store: Store = store ?? new Store()
 
@@ -53,7 +104,7 @@ function initializeStore(initialData = {employees: []}) {
   return _store
 }
 
-export function useStore(initialState: Store) {
+export function useStore(initialState: Data) {
   const store = useMemo(() => initializeStore(initialState), [initialState])
   return store
 }

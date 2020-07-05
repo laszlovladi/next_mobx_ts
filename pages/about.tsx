@@ -1,7 +1,7 @@
 import AboutPage from '../components/AboutPage'
 
 const About = () => {
-  return <AboutPage title="About Page"/>
+  return <AboutPage/>
 }
 
 export default About

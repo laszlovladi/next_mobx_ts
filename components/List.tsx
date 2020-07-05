@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 @inject('store')
 @observer
-class List  extends React.Component<{}> {
+class List extends React.Component {
   
-  handleDelete(idx){
+  handleDelete(idx: number){
     this.props.store.deleteEmployee(idx);
   }
 
