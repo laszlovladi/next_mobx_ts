@@ -1,6 +1,8 @@
 import IndexPage from '../components/IndexPage'
 import { Employee } from '../store'
 import { InferGetServerSidePropsType } from 'next'
+import 'mobx-react-lite/batchingForReactDom'
+
 
 function Index({ initialState }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return <IndexPage title = "Simple List"/>

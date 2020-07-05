@@ -31,13 +31,13 @@ class Store {
 
   hydrate = (data) => {
     if (!data) return
-    console.log('store', store)
+    // console.log('store', store)
     if (!store) this.employees = data.employees !== null ? data.employees : 'no data'
   }
 }
 
 function initializeStore(initialData = {employees: []}) {
-  console.log('store', store)
+  // console.log('store', store)
   const _store: Store = store ?? new Store()
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will

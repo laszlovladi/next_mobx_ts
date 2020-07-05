@@ -34,7 +34,7 @@ class List  extends React.Component<{}> {
                 <td className="text-secondary">{employee.username} </td>
                 <td className="text-secondary">{employee.email}</td>
                 <td className="text-secondary">
-                  <Link as={`/details/${idx}?data=${employee.name}`} href={`/details/[id]`}>
+                  <Link as={`/details/${idx}`} href={`/details/[id]`}>
                     <a className="text-primary">Details</a>
                   </Link>
                 </td>

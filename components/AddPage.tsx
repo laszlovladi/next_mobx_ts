@@ -6,7 +6,29 @@ import { Employee } from '../store'
 @inject('store')
 class AddPage extends React.Component {
   handleSubmit(){
-    this.props.store.addEmployee();
+    // let employee: Employee = {
+    //   id: null,
+    //   name: name,
+    //   username: username,
+    //   email: email,
+    //   address: {
+    //     street: street,
+    //     suite: "Apt. 556",
+    //     city: "Gwenborough",
+    //     zipcode: "92998-3874",
+    //     geo: {
+    //       lat: "-37.3159",
+    //       lng: "81.1496"
+    //   },
+    //   phone: '',
+    //   website: '',
+    //   company: {
+    //     name: "Romaguera-Crona",
+    //     catchPhrase: "Multi-layered client-server neural-net",
+    //     bs: ""
+    //   }
+    // }
+    this.props.store.addEmployee(employee);
   }
 
   render() {
