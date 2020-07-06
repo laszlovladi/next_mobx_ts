@@ -7,8 +7,11 @@ import Link from 'next/link';
 const Employee = inject("store")(observer((props: any) => {
   const router = useRouter()
   const { id } = router.query
+
+  if(props.store.employees){}
   const { name, username, email, phone, website, address, company } = props.store.employees[Number(id)]
-  const { street, suite, city, zipcode, lat, lng } = address
+  const { street, suite, city, zipcode, geo } = address
+  const { lat, lng } = geo
   const { catchPhrase, bs } = company
   const compname = company.name
   return (

@@ -1,6 +1,7 @@
-import { action, computed, observable} from 'mobx'
+import { action, observable} from 'mobx'
 import { useStaticRendering } from 'mobx-react'
 import { useMemo } from 'react'
+import Router from 'next/router'
 // eslint-disable-next-line react-hooks/rules-of-hooks
 useStaticRendering(typeof window === 'undefined')
 
@@ -17,22 +18,22 @@ export interface Employee{
   company: Company
 }
 
-export interface Company{
+interface Company{
   name: string,
   catchPhrase: string,
   bs: string
 }
 
-export interface Geo{
+interface Geo{
   lat: string,
   lng: string
 }
 
-export interface Data{
+interface Data{
   employees: Array<Employee>
 }
 
-export interface Address{
+interface Address{
   street: string,
   suite: string,
   city: string,
@@ -67,18 +68,57 @@ class Store {
     }
   
   @action addEmployee = (employee: Employee): void => {
-    console.log('addEmployee')
+    employee.id = this.employees.length
     this.employees.push(employee)
+    Router.push(`/details/[id]`, `/details/${employee.id}`);  //, `shallow`
   }
 
   @action deleteEmployee = (idx: number): void => {
     this.employees.splice(idx, 1)
   }
 
-  @action onChange = (key, value) => {
-    console.log(key, value)
-    this.newEmployee[key] = value;
-    console.log('this.newEmployee[key]', this.newEmployee[key])
+  @action onChange = (key: string, value: string, prefix: string): void => {
+    switch(prefix+key) {
+      case "name":
+        this.newEmployee.name = value
+        break;
+      case "username":
+        this.newEmployee.username = value
+        break;
+      case "email":
+        this.newEmployee.email = value
+        break;
+      case "phone":
+        this.newEmployee.phone = value
+        break;
+      case "website":
+        this.newEmployee.website = value
+        break;
+      case "address.street":
+        this.newEmployee.address.street = value
+        break;
+      case "address.suite":
+        this.newEmployee.address.suite = value
+        break;
+      case "address.city":
+        this.newEmployee.address.city = value
+        break;
+      case "address.zipcode":
+        this.newEmployee.address.zipcode = value
+        break;
+      case "address.geo.lat":
+        this.newEmployee.address.geo.lat = value
+        break;
+      case "address.geo.lng":
+        this.newEmployee.address.geo.lng = value
+        break;
+      case "company.name":
+        this.newEmployee.company.name = value
+        break;
+      case "company.catchPhrase":
+        this.newEmployee.company.catchPhrase = value
+        break;
+    }
   }
 
   hydrate = (data: Data): void => {

@@ -4,9 +4,23 @@ import React from 'react';
 import { Employee } from '../store'
 import Link from 'next/link';
 
+interface deleteEmployee {
+  (idx: number): void
+}
+
+interface StateItem {
+  newEmployee: Employee,
+  employees: Employee[],
+  deleteEmployee: deleteEmployee
+}
+
+interface State {
+  store: StateItem;
+}
+
 @inject('store')
 @observer
-class List extends React.Component {
+class List extends React.Component<State> {
   
   handleDelete(idx: number){
     this.props.store.deleteEmployee(idx);
